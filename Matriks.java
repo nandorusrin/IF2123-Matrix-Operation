@@ -105,9 +105,9 @@ public class Matriks {
 	public void sortMatriks() {
 		int i, j;
 		if (this.brs > 1) {
-			for (i = 1; i <= this.brs; i++) {
+			for (i = 1; i < this.brs; i++) {
 				int brsMax = i;
-				for (j = 1; j <= this.kol; j++) {
+				for (j = i + 1; j <= this.brs; j++) {
 					int tempMax = this.getFirstIndeks(j);
 					if (tempMax < this.getFirstIndeks(brsMax)) {
 						brsMax = j;
@@ -130,6 +130,43 @@ public class Matriks {
 		}
 	}
 
-	
+	public void gaussForm() {
+		this.sortMatriks();
+		for (int i = 1; i <= this.brs; i++) {
+			if (!this.isBrsKosong(i)) {
+				int idxFirst = this.getFirstIndeks(i);
+				double firstCoef = this.data[i][idxFirst];
+				for (int j = i + 1; j <= this.brs; j++) {
+					if (!this.isBrsKosong(j)) {
+						double k = (-1) * this.data[j][idxFirst] / firstCoef;
+						this.tambahBaris(j, i, k);
+					}
+					this.data[j][idxFirst] = 0;
+				}
+			}
+		}
+		for (int i = 1; i <= this.brs; i++) {
+			if (!this.isBrsKosong(i)) {
+				int idxBrs = this.getFirstIndeks(i);
+				double firstCoef = this.data[i][idxBrs];
+				this.kaliBaris(i, (1 / firstCoef));
+			}
+		}
+	}
+
+	public void gaussJordan() {
+		this.gaussForm();
+		for (int i = this.brs; i > 1; i--) {
+			if(!this.isBrsKosong(i)) {
+				int idxFirst = this.getFirstIndeks(i);
+				for (int j = i - 1; j >= 1; j--) {
+					if (!this.isBrsKosong(j)) {
+						double k = (-1) * this.data[j][idxFirst];
+						this.tambahBaris(j, i, k);
+					}
+				}
+			}
+		}
+	}
 
 }
