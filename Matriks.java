@@ -84,4 +84,52 @@ public class Matriks {
 		}
 	}
 
+	public int getFirstIndeks(int nBrs) {
+		//return indeks kolom tidak nol pertama
+		boolean found = false;
+		int i = 1;
+		while ((i <= this.kol) && !found) {
+			if (this.data[nBrs][i] != 0) {
+				found = true;
+			} else {
+				i++;
+			}
+		}
+		if (found) {
+			return i;
+		} else {
+			return this.kol;
+		}
+	}
+
+	public void sortMatriks() {
+		int i, j;
+		if (this.brs > 1) {
+			for (i = 1; i <= this.brs; i++) {
+				int brsMax = i;
+				for (j = 1; j <= this.kol; j++) {
+					int tempMax = this.getFirstIndeks(j);
+					if (tempMax < this.getFirstIndeks(brsMax)) {
+						brsMax = j;
+					}
+				}
+				this.tukarBaris(i, brsMax);
+			}
+		}
+	}
+
+	public boolean isBrsKosong(int nBrs) {
+		int i = 1;
+		while ((this.data[nBrs][i] == 0) && i < this.kol) {
+			i++;
+		}
+		if (this.data[nBrs][i] == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	
+
 }
