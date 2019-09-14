@@ -35,6 +35,7 @@ public class Main {
 					case '3':
 						break;
 					case '4':
+						MatrixSPL.KaidahCramer(bacaInputMatriks(input));
 						break;
 					default:
 
