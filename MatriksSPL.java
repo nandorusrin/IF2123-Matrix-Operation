@@ -50,6 +50,59 @@ public class MatriksSPL extends Matriks {
 	public void solveCramerRule() {
 		// Ax = b
 		// x1 = det(A1)/det(A), x2 = det(A2)/det(A), ...
+        if (this.getBrs() != this.getKol() - 1) {
+            System.out.println("Tidak bisa diselesaikan dengan kaidah Cramer!");
+            this.solution = false;
+            return;
+        }
+
+        // Memisahkan konstanta (b) dan koefisien variabel (A) persamaan
+        double[] konstantaPersamaan = new double[this.nPeubah+2];
+        Matriks koefisienVariabel = new Matriks(this.getBrs(), this.getKol() - 1);
+
+        for(int i = 1; i <= this.getBrs(); i++) {
+            for(int j = 1; j <= this.getKol(); j++) {
+                if (j == this.getKol()) {
+                    konstantaPersamaan[i] = this.data[i][j];
+                }
+                else {
+                    koefisienVariabel.data[i][j] = this.data[i][j];
+                }
+            }
+        }
+
+        // Mencari determinan matriks koefisien variabel
+        double determinanKoefisienVariabel = koefisienVariabel.determinantLaplaceExpansion();
+
+        if (determinanKoefisienVariabel == 0) {
+            System.out.println("Tidak bisa diselesaikan dengan kaidah Cramer! (Tidak memiliki solusi unik)");
+            this.solution = false;
+            return;
+        }
+
+        // iterasi tiap Ai pada kaidah Cramer
+        for(int kolomTukar = 1; kolomTukar <= this.getKol(); kolomTukar++) {
+            Matriks tempMatrix = new Matriks(koefisienVariabel.getBrs(), koefisienVariabel.getKol());
+
+            for (int i = 1; i <= koefisienVariabel.getBrs(); i++) {
+                for (int j = 1; j <= koefisienVariabel.getKol(); j++) {
+                    if (j == kolomTukar) {
+                        // Tukar kolom dengan konstanta persamaan (b)
+                        tempMatrix.data[i][j] = konstantaPersamaan[i];
+                    }
+                    else {
+                        tempMatrix.data[i][j] = koefisienVariabel.data[i][j];
+                    }
+                }
+            }
+
+            // det(Ai)
+            double tempDeterminant = tempMatrix.determinantLaplaceExpansion();
+
+            this.hasilSPL[kolomTukar] = tempDeterminant/determinanKoefisienVariabel;
+        }
+
+        this.solution = true;
 	}
 
 
@@ -60,5 +113,4 @@ public class MatriksSPL extends Matriks {
 		}
 		return hasil;
 	}
-
 }
