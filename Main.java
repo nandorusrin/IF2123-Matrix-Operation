@@ -27,6 +27,19 @@ public class Main {
 					"4. Kaidah Cramer\n");
 				inputPilihan = input.next().charAt(0);
 
+				switch(inputPilihan) {
+					case '1':
+						break;
+					case '2':
+						break;
+					case '3':
+						break;
+					case '4':
+						break;
+					default:
+
+				}
+
 			} else if (inputMenu == '2') {
 
 			} else if (inputMenu == '3') {
@@ -41,6 +54,18 @@ public class Main {
 
 		} while (inputMenu != '7');
 
+		input.close();
+	}
 
+	private static Matriks bacaInputMatriks(Scanner input) {
+        int rowCount = input.nextInt();
+
+        int columnCount = input.nextInt();
+
+		Matriks matriks = new Matriks(rowCount, columnCount);
+
+		matriks.bacaMatriks(input);
+
+		return matriks;
 	}
 }

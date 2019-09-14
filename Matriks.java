@@ -26,8 +26,7 @@ public class Matriks {
 		return this.kol;
 	}
 
-	public void bacaMatriks() {
-		Scanner scan = new Scanner(System.in);
+	public void bacaMatriks(Scanner scan) {
 		for (int i = 1; i <= this.brs; i++) {
 			for (int j = 1; j <= this.kol; j++) {
 				this.data[i][j] = scan.nextDouble();
