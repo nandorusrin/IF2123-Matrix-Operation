@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * Kelas yang berisi implementasi algoritma pencari solusi SPL.
+ */
 public class MatrixSPL {
 
+    /**
+     * Menyelesaikan SPL dengan kaidah Cramer.
+     * @param persamaan Objek Matriks yang berisi persamaan SPL.
+     */
     public static void kaidahCramer(Matriks persamaan) {
 
         if (persamaan.getBrs() != persamaan.getKol() - 1) {
@@ -59,6 +66,10 @@ public class MatrixSPL {
         tulisJawaban(result);
     }
 
+    /**
+     * Menulis solusi SPL.
+     * @param answer ArrayList<double> yang berisi solusi SPL.
+     */
     private static void tulisJawaban(ArrayList<Double> answer) {
 
         if (answer = null) {
