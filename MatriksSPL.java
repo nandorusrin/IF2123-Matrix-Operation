@@ -1,58 +1,57 @@
 public class MatriksSPL extends Matriks {
-	private double[] hasilSPL;
-	private int nPeubah;
-	private boolean solution;
-	private int[] status; //0 = tidak ada, 1 = solusi tunggal, 2 = solusi banyak
+    private double[] hasilSPL;
+    private int nPeubah;
+    private boolean solution;
+    private int[] status; // 0 = tidak ada, 1 = solusi tunggal, 2 = solusi banyak
 
-	public MatriksSPL(int _brs, int _kol) {
-		super(_brs,_kol);
-		this.nPeubah = this.kol - 1;
-		this.hasilSPL = new double[nPeubah+2];
-		this.solution = true;
-	}
+    public MatriksSPL(int _brs, int _kol) {
+        super(_brs, _kol);
+        this.nPeubah = this.kol - 1;
+        this.hasilSPL = new double[nPeubah + 2];
+        this.solution = true;
+    }
 
-	public boolean getSolution() {
-		return this.solution;
-	}
+    public boolean getSolution() {
+        return this.solution;
+    }
 
-	public void cekStatus() {
-		for (int i = this.brs; i > 0; i--) {
-			if(!this.isBrsKosong(i)) {
-				int idxFirst = this.getFirstIndeks(i);
-				if (idxFirst == this.kol) {
-					this.solution = false;
-				} else {
-					
-				}
-			}
-		}
-	}
+    public void cekStatus() {
+        for (int i = this.brs; i > 0; i--) {
+            if (!this.isBrsKosong(i)) {
+                int idxFirst = this.getFirstIndeks(i);
+                if (idxFirst == this.kol) {
+                    this.solution = false;
+                } else {
 
-	public void solveGaussForm() {
-		this.cekStatus();
-		if (this.solution) {
+                }
+            }
+        }
+    }
 
-		}	
-	}
+    public void solveGaussForm() {
+        this.cekStatus();
+        if (this.solution) {
 
-	public void solveGaussJordan() {
-		this.cekStatus();
-		if (this.solution) {
+        }
+    }
 
-		}	
-	}
+    public void solveGaussJordan() {
+        this.cekStatus();
+        if (this.solution) {
 
-	public void solveMatriksBalikan() {
-		// [A|I] => [I|A^-1] USING OBE
-		// [x = A^-1.b]
-	}
+        }
+    }
 
-	/**
-     * Menyelesaikan SPL dengan kaidah Cramer.
-     * Ax = b
-     * x1 = det(A1)/det(A), x2 = det(A2)/det(A), ...
+    public void solveMatriksBalikan() {
+        // [A|I] => [I|A^-1] USING OBE
+        // [x = A^-1.b]
+    }
+
+    /**
+     * Menyelesaikan SPL dengan kaidah Cramer. Ax = b x1 = det(A1)/det(A), x2 =
+     * det(A2)/det(A), ...
      */
-	public void solveCramerRule() {
+    public void solveCramerRule() {
         if (this.getBrs() != this.getKol() - 1) {
             System.out.println("Tidak bisa diselesaikan dengan kaidah Cramer!");
             this.solution = false;
@@ -60,15 +59,14 @@ public class MatriksSPL extends Matriks {
         }
 
         // Memisahkan konstanta (b) dan koefisien variabel (A) persamaan
-        double[] konstantaPersamaan = new double[this.nPeubah+2];
+        double[] konstantaPersamaan = new double[this.nPeubah + 2];
         Matriks koefisienVariabel = new Matriks(this.getBrs(), this.getKol() - 1);
 
-        for(int i = 1; i <= this.getBrs(); i++) {
-            for(int j = 1; j <= this.getKol(); j++) {
+        for (int i = 1; i <= this.getBrs(); i++) {
+            for (int j = 1; j <= this.getKol(); j++) {
                 if (j == this.getKol()) {
                     konstantaPersamaan[i] = this.data[i][j];
-                }
-                else {
+                } else {
                     koefisienVariabel.data[i][j] = this.data[i][j];
                 }
             }
@@ -84,7 +82,7 @@ public class MatriksSPL extends Matriks {
         }
 
         // iterasi tiap Ai pada kaidah Cramer
-        for(int kolomTukar = 1; kolomTukar <= this.getKol(); kolomTukar++) {
+        for (int kolomTukar = 1; kolomTukar <= this.getKol(); kolomTukar++) {
             Matriks tempMatrix = new Matriks(koefisienVariabel.getBrs(), koefisienVariabel.getKol());
 
             for (int i = 1; i <= koefisienVariabel.getBrs(); i++) {
@@ -92,8 +90,7 @@ public class MatriksSPL extends Matriks {
                     if (j == kolomTukar) {
                         // Tukar kolom dengan konstanta persamaan (b)
                         tempMatrix.data[i][j] = konstantaPersamaan[i];
-                    }
-                    else {
+                    } else {
                         tempMatrix.data[i][j] = koefisienVariabel.data[i][j];
                     }
                 }
@@ -102,18 +99,17 @@ public class MatriksSPL extends Matriks {
             // det(Ai)
             double tempDeterminant = tempMatrix.determinantLaplaceExpansion();
 
-            this.hasilSPL[kolomTukar] = tempDeterminant/determinanKoefisienVariabel;
+            this.hasilSPL[kolomTukar] = tempDeterminant / determinanKoefisienVariabel;
         }
 
         this.solution = true;
-	}
+    }
 
-	public String hasilSPL() {
-		String hasil = "";
-		for (int i = 1; i <= this.nPeubah; i++) {
-			hasil += String.format("x%d = %f; ", i, this.hasilSPL[i]);
-		}
-		return hasil;
-	}
-
+    public String hasilSPL() {
+        String hasil = "";
+        for (int i = 1; i <= this.nPeubah; i++) {
+            hasil += String.format("x%d = %f; ", i, this.hasilSPL[i]);
+        }
+        return hasil;
+    }
 }
