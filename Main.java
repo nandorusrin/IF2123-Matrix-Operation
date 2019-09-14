@@ -115,6 +115,6 @@ public class Main {
 
 		} while (inputMenu != '7');
 
-
+		input.close();
 	}
 }
