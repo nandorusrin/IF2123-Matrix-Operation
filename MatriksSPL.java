@@ -75,9 +75,11 @@ public class MatrixSPL {
         if (answer = null) {
             System.out.println("Tidak ada solusi!");
         }
+
+        System.out.println("Solusi:");
         
         for(int i = 0; i < answer.size(); i++) {
-            System.out.println();
+            System.out.println("X" + (i+1) + " = " + answer.get(i));
         }
     }
 }
