@@ -18,7 +18,7 @@ public class main {
 				"7. Keluar\n");
 			inputMenu = input.next().charAt(0);
 			if (inputMenu == '1') {
-				Matriks M;
+				MatriksSPL M;
 				System.out.printf("\nPILIHAN : \n");
 				System.out.printf(
 					"1. Metode eliminasi Gauss\n" + 
@@ -26,7 +26,31 @@ public class main {
 					"3. Metode matriks balikan\n" + 
 					"4. Kaidah Cramer\n");
 				inputPilihan = input.next().charAt(0);
-
+				//  input manual
+				brs = input.nextInt();
+				kol = input.nextInt();
+				M = new MatriksSPL(brs, kol);
+				M.bacaMatriks();
+				if (inputPilihan == '1') {
+					M.gaussForm();
+					M.printMatriks();
+					M.solveGaussForm();
+				} else if (inputPilihan == '2') {
+					M.gaussJordan();
+					M.printMatriks();
+					M.solveGaussJordan();
+				} else if (inputPilihan == '3') {
+					
+				} else if (inputPilihan == '4') {
+					
+				}
+				System.out.println("Solusi SPL");
+				if (!M.getSolution()) {
+					System.out.println("No solution");
+				} else {
+					String hasil = M.printHasilSPL();
+					System.out.println(hasil);
+				}
 			} else if (inputMenu == '2') {
 
 			} else if (inputMenu == '3') {
