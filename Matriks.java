@@ -169,4 +169,13 @@ public class Matriks {
 		}
 	}
 
+	public double determinant() {
+		double hasil = 1;
+		this.gaussJordan();
+		for (int i = 1; i <= this.brs; i++) {
+				hasil *= this.data[i][i];
+			}
+		return hasil;
+	}
+
 }
