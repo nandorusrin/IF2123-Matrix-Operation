@@ -40,15 +40,15 @@ public class main {
 					M.printMatriks();
 					M.solveGaussJordan();
 				} else if (inputPilihan == '3') {
-					
+					M.solveMatriksBalikan();
 				} else if (inputPilihan == '4') {
-					
+					M.solveCramerRule();
 				}
 				System.out.println("Solusi SPL");
 				if (!M.getSolution()) {
 					System.out.println("No solution");
 				} else {
-					String hasil = M.printHasilSPL();
+					String hasil = M.hasilSPL();
 					System.out.println(hasil);
 				}
 			} else if (inputMenu == '2') {
