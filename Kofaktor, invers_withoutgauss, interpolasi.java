@@ -33,7 +33,7 @@ public class Main {
         System.out.println("Interpolasi: ");
         // proses menghitung interpolasi
         for (i = 1; i < this.brs; i++) {
-            for (i = 1; i < this.brs; i++) {
+            for (j = 1; j < this.kol; j++) {
                 this.data[i][j]= math.pow(this.data[i][j],j-1);
                 this.gaussJordan();
             }
