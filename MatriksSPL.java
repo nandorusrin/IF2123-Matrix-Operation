@@ -54,11 +54,11 @@ public class MatriksSPL extends Matriks {
 
 
 	public String hasilSPL() {
-        String hasil = "";
-        for (int i = 1; i <= this.nPeubah; i++) {
-        	hasil += String.format("x%d = %f; ", i, this.hasilSPL[i]);
-        }
-        return hasil;
-    }
+		String hasil = "";
+		for (int i = 1; i <= this.nPeubah; i++) {
+			hasil += String.format("x%d = %f; ", i, this.hasilSPL[i]);
+		}
+		return hasil;
+	}
 
 }

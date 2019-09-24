@@ -10,6 +10,11 @@ public class Matriks {
 		this.brs = _brs;
 		this.kol = _kol;
 		data = new double[_brs+2][_kol+2];
+		for (int i = 1; i < this.brs; i++) {
+			for (int j = 1; i < this.kol; i++) {
+				data[i][j] = 0;
+			}
+		}
 	}
 
 	public Matriks(double[][] n_data, int _brs, int _kol) {
@@ -167,6 +172,79 @@ public class Matriks {
 				}
 			}
 		}
+	}
+
+	public void inversOBE() {
+		Matriks Inv;
+		Inv = new Matriks(this.brs, this.kol);
+		for (int i = 1; i <= this.brs; i++) {
+			Inv.data[i][i] = 1;
+		}
+		Inv.printMatriks();
+		//sort
+		if (this.brs > 1) {
+			for (int i = 1; i < this.brs; i++) {
+				int brsMax = i;
+				for (int j = i + 1; j <= this.brs; j++) {
+					int tempMax = this.getFirstIndeks(j);
+					if (tempMax < this.getFirstIndeks(brsMax)) {
+						brsMax = j;
+					}
+				}
+				this.tukarBaris(i, brsMax);
+				Inv.tukarBaris(i, brsMax);
+			}
+		}
+		//gauss
+		for (int i = 1; i <= this.brs; i++) {
+			if (!this.isBrsKosong(i)) {
+				int idxFirst = this.getFirstIndeks(i);
+				double firstCoef = this.data[i][idxFirst];
+				for (int j = i + 1; j <= this.brs; j++) {
+					if (!this.isBrsKosong(j)) {
+						double k = (-1) * this.data[j][idxFirst] / firstCoef;
+						System.out.println(k);
+						this.tambahBaris(j, i, k);
+						Inv.tambahBaris(j, i, k);
+					}
+					this.data[j][idxFirst] = 0;
+				}
+			}
+			System.out.println("step gauss");
+			this.printMatriks();
+			System.out.println("invers");
+			Inv.printMatriks();
+		}
+		for (int i = 1; i <= this.brs; i++) {
+			if (!this.isBrsKosong(i)) {
+				int idxBrs = this.getFirstIndeks(i);
+				double firstCoef = this.data[i][idxBrs];
+				this.kaliBaris(i, (1 / firstCoef));
+				Inv.kaliBaris(i, (1 / firstCoef));
+			}
+			System.out.println("step gauss2");
+			this.printMatriks();
+			System.out.println("invers");
+			Inv.printMatriks();
+		}
+		//gaussjordan
+		for (int i = this.brs; i > 1; i--) {
+			if(!this.isBrsKosong(i)) {
+				int idxFirst = this.getFirstIndeks(i);
+				for (int j = i - 1; j >= 1; j--) {
+					if (!this.isBrsKosong(j)) {
+						double k = (-1) * this.data[j][idxFirst];
+						this.tambahBaris(j, i, k);
+						Inv.tambahBaris(j, i, k);
+					}
+				}
+			}
+		}
+		System.out.println("step gaussJordan");
+		this.printMatriks();
+		System.out.println("invers");
+		Inv.printMatriks();
+		this.data = Inv.data;
 	}
 
 	public double determinant() {
