@@ -48,8 +48,9 @@ public class MatriksSPL extends Matriks {
     }
 
     /**
-     * Menyelesaikan SPL dengan kaidah Cramer. Ax = b x1 = det(A1)/det(A), x2 =
-     * det(A2)/det(A), ...
+     * Menyelesaikan SPL dengan kaidah Cramer.
+     * Ax = b
+     * x1 = det(A1)/det(A), x2 = det(A2)/det(A), ...
      */
     public void solveCramerRule() {
         if (this.getBrs() != this.getKol() - 1) {
