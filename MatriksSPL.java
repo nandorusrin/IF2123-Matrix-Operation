@@ -47,9 +47,12 @@ public class MatriksSPL extends Matriks {
 		// [x = A^-1.b]
 	}
 
+    /**
+     * Menyelesaikan SPL dengan kaidah Cramer.
+     * Ax = b
+     * x1 = det(A1)/det(A), x2 = det(A2)/det(A), ...
+     */
 	public void solveCramerRule() {
-		// Ax = b
-		// x1 = det(A1)/det(A), x2 = det(A2)/det(A), ...
         if (this.getBrs() != this.getKol() - 1) {
             System.out.println("Tidak bisa diselesaikan dengan kaidah Cramer!");
             this.solution = false;
@@ -104,7 +107,6 @@ public class MatriksSPL extends Matriks {
 
         this.solution = true;
 	}
-
 
 	public String hasilSPL() {
 		String hasil = "";
