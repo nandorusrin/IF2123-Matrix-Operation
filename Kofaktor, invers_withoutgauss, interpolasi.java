@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
 
 // proses menghitung kofaktor
 public class Main {
@@ -17,9 +19,11 @@ public class Main {
         System.out.println();
         System.out.println("Hasil matriks inversnya adalah: ");
         // proses menghitung invers
+        Matriks adjoinMatrix = new Matriks(matrix.getBrs(), matrix.getKol());
         for (int i = 0; i < this.brs; i++) {
             for (int j = 0; j < this.kol; j++) {
-                System.out.print(adjoin[i][j]/determinan+"\t");
+                adjoinMatrix.data[i][j] = adjoin(matrix);
+                System.out.print(adjoin(matrix)/this.determinant()+"\t");
             }
             System.out.println();
         }
@@ -27,10 +31,7 @@ public class Main {
 }
 
 // Interpolasi
-public class Main {
-    public static void main(String[] args) {
-        System.out.println();
-        System.out.println("Interpolasi: ");
+   public void interpolasi(){
         // proses menghitung interpolasi
         for (i = 1; i < this.brs; i++) {
             for (j = 1; j < this.kol; j++) {
@@ -39,5 +40,4 @@ public class Main {
             }
         }
     }
-}
         
