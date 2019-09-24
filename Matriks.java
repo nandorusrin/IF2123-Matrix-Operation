@@ -336,4 +336,21 @@ public class Matriks {
 
         return subMatrix.determinantLaplaceExpansion();
     }
+
+    /**
+     * Melakukan transpos dari suatu matriks.
+     * 
+     * @return transpos dari matriks masukan.
+     */
+    public Matriks transposeMatriks() {
+        Matriks newMatrix = new Matriks(this.getKol(), this.getBrs());
+
+        for (int i = 1; i < this.getBrs(); i++) {
+            for (int j = 1; j < this.getKol(); j++) {
+                newMatrix.data[j][i] = this.data[i][j];
+            }
+        }
+
+        return newMatrix;
+    }
 }
