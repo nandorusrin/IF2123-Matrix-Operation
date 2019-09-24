@@ -66,7 +66,15 @@ public class Main {
 				solver.solve();
 				solver.printResult();
 			} else if (inputMenu == '5') {
+				System.out.println("Masukkan jumlah baris dan kolom:");
+				int baris = input.nextInt();
+				int kolom = input.nextInt();
+				Matriks mat = new MatriksSPL(baris, kolom);
+				mat.bacaMatriks();
 
+				SolveAdjoin solver = new SolveAdjoin(mat);
+				solver.solve();
+				solver.printResult();
 			} else if (inputMenu == '6') {
 
 			}
