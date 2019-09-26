@@ -2,18 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 
-/*
-// proses menghitung kofaktor
-public class Main {
-public static void main(String[] args) {       
-float [][]kof = new float [i][j];
-        for (int i=0; i<this.brs; i++) {
-            for (int j=0; j<thin.kol; j++) {
-                kof[i][j] = (int) Math.pow((-1), (i+1)+(j+1))*(min[i][j]);
-            }
-    }   }
-}
-
 // Invers without gauss
 public class Main {
     public static void main(String[] args) {
