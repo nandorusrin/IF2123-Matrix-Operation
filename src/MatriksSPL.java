@@ -124,6 +124,7 @@ public class MatriksSPL extends Matriks {
         }
 
         this.solution = true;
+        System.out.println(this.hasilSPL());
     }
 
     public String hasilSPL() {
