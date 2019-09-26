@@ -7,6 +7,10 @@ public class MatriksInvers extends Matriks {
         super(_brs,_kol);
     }
 
+    public MatriksInvers(Matriks mat) {
+        super(mat.data, mat.getBrs(), mat.getKol());
+    }
+
     public void inversAdjoin() {
     	// proses menghitung invers
 		//Matriks adjoinMatrix = new Matriks(matrix.getBrs(), matrix.getKol());

@@ -7,6 +7,10 @@ public class MatriksInterpolasi extends Matriks {
         super(_brs,_kol);
     }
 
+    public MatriksInterpolasi(Matriks mat) {
+        super(mat.data, mat.getBrs(), mat.getKol());
+    }
+
     // Interpolasi
     public void interpolasi(){
         // proses menghitung interpolasi

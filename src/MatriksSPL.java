@@ -11,6 +11,13 @@ public class MatriksSPL extends Matriks {
 		this.solution = true;
 	}
 
+    public MatriksSPL(Matriks mat) {
+        super(mat.data, mat.getBrs(), mat.getKol());
+		this.nPeubah = this.kol - 1;
+		this.hasilSPL = new double[nPeubah+2];
+		this.solution = true;
+    }
+
 	public boolean getSolution() {
 		return this.solution;
 	}
