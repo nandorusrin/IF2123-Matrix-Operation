@@ -17,7 +17,7 @@ public class MatriksInterpolasi extends Matriks {
             }
         }
         system.out.printf("y= ");
-        system.out.printf("%.1f ", this.data[i][this.kol]);
+        system.out.printf("%.1f ", this.data[1][this.kol]);
         for (int i = 2; i < this.brs; i++){
             if (0!= this.data[i][this.kol]);{
                 if (this.data[i][this.kol] >=0){
