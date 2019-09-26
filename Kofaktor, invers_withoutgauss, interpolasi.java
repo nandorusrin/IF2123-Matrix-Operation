@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 
+/*
 // proses menghitung kofaktor
 public class Main {
 public static void main(String[] args) {       
@@ -31,13 +32,13 @@ public class Main {
 }
 
 // Interpolasi
-   public void interpolasi(){
+    public void interpolasi(){
         // proses menghitung interpolasi
-        for (i = 1; i < this.brs; i++) {
-            for (j = 1; j < this.kol; j++) {
+        for (int i = 1; i < this.brs; i++) {
+            for (int j = 1; j < this.kol; j++) {
                 this.data[i][j]= math.pow(this.data[i][j],j-1);
                 this.gaussJordan();
             }
         }
     }
-        
+*/ 
