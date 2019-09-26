@@ -139,6 +139,9 @@ public class MatriksSPL extends Matriks {
 
         for (int i = 1; i <= this.getBrs(); i++) {
             int xi = this.getFirstIndeks(i);
+            if (xi == this.getKol()) {
+                continue;
+            }
             hasil += "x" + xi + " = ";
             for (int j = xi+1; j < this.getKol(); j++) {
                 if (this.data[i][j] != 0) {
