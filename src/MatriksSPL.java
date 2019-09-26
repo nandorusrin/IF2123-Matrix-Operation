@@ -31,15 +31,15 @@ public class MatriksSPL extends Matriks {
 	public void solveGaussForm() {
 		this.cekStatus();
 		if (this.solution) {
-
+            System.out.println(hasilSPLMaybeNonUnique());
 		}	
 	}
 
 	public void solveGaussJordan() {
 		this.cekStatus();
 		if (this.solution) {
-
-		}	
+            System.out.println(hasilSPLMaybeNonUnique());
+		}
 	}
 
 	public void solveMatriksBalikan() {
@@ -124,6 +124,23 @@ public class MatriksSPL extends Matriks {
         for (int i = 1; i <= this.nPeubah; i++) {
             hasil += String.format("x%d = %f; ", i, this.hasilSPL[i]);
         }
+        return hasil;
+    }
+
+    public String hasilSPLMaybeNonUnique() {
+        String hasil = "";
+
+        for (int i = 1; i <= this.getBrs(); i++) {
+            int xi = this.getFirstIndeks(i);
+            hasil += "x" + xi + " = ";
+            for (int j = xi+1; j < this.getKol(); j++) {
+                if (this.data[i][j] != 0) {
+                    hasil += (this.data[i][j]*-1) + "*x" + j + " + ";
+                }
+            }
+            hasil += this.data[i][this.getKol()] + "\n";
+        }
+
         return hasil;
     }
 }
