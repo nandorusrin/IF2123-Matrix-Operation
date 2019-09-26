@@ -250,25 +250,18 @@ public class Matriks {
 	public double determinantOBE() {
 		int i, j;
 		double hasil = 1;
-		if (this.brs > 1) {
-			for (i = 1; i < this.brs; i++) {
-				int brsMax = i;
-				for (j = i + 1; j <= this.brs; j++) {
-					int tempMax = this.getFirstIndeks(j);
-					if (tempMax < this.getFirstIndeks(brsMax)) {
-						brsMax = j;
-					}
-				}
-				this.tukarBaris(i, brsMax);
-				if (!(i == brsMax)) {
-					hasil *= (-1);
-				}
+
+		for (i = 1; i <= this.brs; i++) {
+			double iLead = this.data[i][i];
+
+			hasil *= iLead;
+			for (j = i + 1; j <= this.brs; j++) {
+				double jLead = this.data[j][i];
+
+				this.tambahBaris(j, i, -jLead/iLead);
 			}
 		}
-		this.gaussJordan();
-		for (i = 1; i <= this.brs; i++) {
-			hasil *= this.data[i][i];
-		}
+		
 		return hasil;
 	}
 
