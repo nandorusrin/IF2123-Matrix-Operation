@@ -45,6 +45,19 @@ public class MatriksSPL extends Matriks {
 	public void solveMatriksBalikan() {
 		// [A|I] => [I|A^-1] USING OBE
 		// [x = A^-1.b]
+		// konstanta (b)
+		double[] b_coef = new double[this.brs + 2];
+		for (int i = 1; i <= this.brs; i++) {
+			b_coef[i] = this.data[i][this.kol];
+		}
+		// matriks invers
+		this.inversOBE();
+		// hasil persamaan
+		for (int i = 1; i <= this.brs; i++) {
+			for (int j = 1; j <= (this.kol - 1); j++) {
+				hasilSPL[i] += (this.data[i][j] * b_coef[j]);
+			}
+		}
 	}
 
 	/**
