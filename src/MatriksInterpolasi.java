@@ -16,17 +16,17 @@ public class MatriksInterpolasi extends Matriks {
                 this.gaussJordan();
             }
         }
-        system.out.printf("y= ");
-        system.out.printf("%.1f ", this.data[1][this.kol]);
+        System.out.printf("y= ");
+        System.out.printf("%.1f ", this.data[1][this.kol]);
         for (int i = 2; i <= this.brs; i++){
             if (0 != this.data[i][this.kol]){
                 if (this.data[i][this.kol] >= 0){
-                    system.out.printf("+");
+                    System.out.printf("+");
                 }
-                system.out.printf("%.1fx^%d ", this.data[i][this.kol], i-1);
+                System.out.printf("%.1fx^%d ", this.data[i][this.kol], i-1);
             }
         }
-        system.out.printf("\n");
+        System.out.printf("\n");
     }
 }
 
