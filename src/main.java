@@ -147,12 +147,12 @@ public class main {
 
 			System.out.println("Masukkan koordinat:");
 			for(int i = 1; i <= baris; i++) {
-				int x = input.nextInt();
+				double x = input.nextDouble();
 				for(int j = 1; j < kolom; j++) {
 					matriksDouble[i][j] = x;
 				}
 
-				matriksDouble[i][kolom] = input.nextInt();
+				matriksDouble[i][kolom] = input.nextDouble();
 			}
 
 			mat = new Matriks(matriksDouble, baris, kolom);
