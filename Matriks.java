@@ -294,7 +294,7 @@ public class Matriks {
 			if (this.data[i][1] == 0) {
 				continue;
 			} else {
-				result += kofaktor(i, 1);
+				result += this.data[i][1] * kofaktor(i, 1);
 			}
 		}
 
