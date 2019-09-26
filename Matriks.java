@@ -256,4 +256,102 @@ public class Matriks {
 		return hasil;
 	}
 
+	/**
+     * Mencari determinan dari sebuah matriks dengan metode Laplace Expansion.
+     * 
+     * @return Mengembalikan nilai determinan.
+     *         Jika matriks bukan matriks persegi (NxN) maka mengembalikan Double.NaN.
+     */
+    public double determinantLaplaceExpansion() {
+        if (this.getKol() != this.getBrs()) {
+            return Double.NaN;
+        }
+
+        if (this.getKol() == 1 && this.getBrs() == 1) {
+            return this.data[1][1];
+        }
+
+        double result = 0;
+
+        // menggunakan kolom 1
+        for (int i = 1; i <= this.getBrs(); i++) {
+            if (this.data[i][1] == 0) {
+                continue;
+            } else {
+                result += kofaktor(i, 1);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Mencari kofaktor dari sebuah entri matriks.
+     * 
+     * @param blockedRow baris entri yang ingin dicari kofaktor-nya.
+     * @param blockedColumn kolom entri yang ingin dicari kofaktor-nya.
+     * @return Kofaktor dari entri matriks masukan.
+     *         Jika matriks bukan matriks persegi (NxN) maka mengembalikan null.
+     */
+    public double kofaktor(int blockedRow, int blockedColumn) {
+		// Tanda positif jika (blockedRow + blockedColumn) genap dan negatif jika ganjil
+        int sign = (((blockedRow + blockedColumn) % 2) == 0) ? 1 : -1;
+
+        return sign * this.minor(blockedRow, blockedColumn);
+    }
+
+    /**
+     * Mencari minor dari sebuah entri matriks.
+     * 
+     * @param blockedRow baris entri yang ingin dicari minor-nya.
+     * @param blockedColumn kolom  entri yang ingin dicari minor-nya.
+     * @return 
+     */
+    private double minor(int blockedRow, int blockedColumn) {
+        if (blockedRow < 1 || blockedRow > this.getBrs() || blockedColumn < 1
+                || blockedColumn > this.getKol()) {
+            return Double.NaN;
+        }
+
+        Matriks subMatrix = new Matriks(this.getBrs() - 1, this.getKol() - 1);
+
+        int currentRow = 1;
+        int currentColumn = 1;
+
+        for (int i = 1; i <= this.getBrs(); i++) {
+            if (i == blockedRow) {
+                continue;
+            } else {
+                for (int j = 1; j <= this.getKol(); j++) {
+                    if (j == blockedColumn) {
+                        continue;
+                    } else {
+                        subMatrix.data[currentRow][currentColumn] = this.data[i][j];
+                        currentColumn++;
+                    }
+                }
+                currentRow++;
+            }
+        }
+
+        return subMatrix.determinantLaplaceExpansion();
+    }
+
+    /**
+     * Melakukan transpos dari suatu matriks.
+     * 
+     * @return transpos dari matriks masukan.
+     */
+    public Matriks transposeMatriks() {
+        Matriks newMatrix = new Matriks(this.getKol(), this.getBrs());
+
+        for (int i = 1; i < this.getBrs(); i++) {
+            for (int j = 1; j < this.getKol(); j++) {
+                newMatrix.data[j][i] = this.data[i][j];
+            }
+        }
+
+        return newMatrix;
+    }
+
 }
