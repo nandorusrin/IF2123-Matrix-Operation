@@ -38,8 +38,12 @@ public class main {
 					M.solveGaussJordan();
 				} else if (inputPilihan == '3') {
 					M.solveMatriksBalikan();
+					String hasil = M.hasilSPL();
+					System.out.println(hasil);
 				} else if (inputPilihan == '4') {
 					M.solveCramerRule();
+					String hasil = M.hasilSPL();
+					System.out.println(hasil);
 				}
 				if (!M.getSolution()) {
 					System.out.println("No solution");
