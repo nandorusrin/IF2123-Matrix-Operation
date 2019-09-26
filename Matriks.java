@@ -10,8 +10,8 @@ public class Matriks {
 		this.brs = _brs;
 		this.kol = _kol;
 		data = new double[_brs + 2][_kol + 2];
-		for (int i = 1; i < this.brs; i++) {
-			for (int j = 1; i < this.kol; i++) {
+		for (int i = 1; i <= this.brs; i++) {
+			for (int j = 1; i <= this.kol; i++) {
 				data[i][j] = 0;
 			}
 		}
@@ -331,12 +331,11 @@ public class Matriks {
 		Matriks subMatrix = new Matriks(this.getBrs() - 1, this.getKol() - 1);
 
 		int currentRow = 1;
-		int currentColumn = 1;
-
 		for (int i = 1; i <= this.getBrs(); i++) {
 			if (i == blockedRow) {
 				continue;
 			} else {
+				int currentColumn = 1;
 				for (int j = 1; j <= this.getKol(); j++) {
 					if (j == blockedColumn) {
 						continue;
