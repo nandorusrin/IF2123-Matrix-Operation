@@ -11,7 +11,7 @@ public class Matriks {
 		this.kol = _kol;
 		data = new double[_brs + 2][_kol + 2];
 		for (int i = 1; i <= this.brs; i++) {
-			for (int j = 1; i <= this.kol; i++) {
+			for (int j = 1; j <= this.kol; j++) {
 				data[i][j] = 0;
 			}
 		}
