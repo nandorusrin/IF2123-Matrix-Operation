@@ -52,7 +52,7 @@ public class main {
 					System.out.println(hasil);
 				}
 			} else if (inputMenu == '2') {
-				MatriksSPL M;
+				MatriksDeterminan M;
 				System.out.printf("\nPILIHAN : \n");
 				System.out.printf(
 					"1. Metode row reduction a.k.a OBE \n" + 
@@ -61,7 +61,7 @@ public class main {
 				System.out.println("Masukkan jumlah baris dan kolom:");
 				brs = input.nextInt();
 				kol = input.nextInt();
-				M = new MatriksSPL(brs, kol);
+				M = new MatriksDeterminan(brs, kol);
 				M.bacaMatriks();
 				if (inputPilihan == '1') {
 					double hasil = M.determinantOBE();
@@ -71,7 +71,7 @@ public class main {
 					System.out.println("Hasil determinant = " + hasil);
 				}
 			} else if (inputMenu == '3') {
-				MatriksSPL M;
+				MatriksInvers M;
 				System.out.printf("\nPILIHAN : \n");
 				System.out.printf(
 					"1. Metode row reduction a.k.a OBE \n" + 
@@ -80,13 +80,13 @@ public class main {
 				System.out.println("Masukkan jumlah baris dan kolom:");
 				brs = input.nextInt();
 				kol = input.nextInt();
-				M = new MatriksSPL(brs, kol);
+				M = new MatriksInvers(brs, kol);
 				M.bacaMatriks();
 				if (inputPilihan == '1') {
 					M.inversOBE();
 					M.printMatriks();
 				} else if (inputPilihan == '2') {
-					//M.inversAdjoin();
+					M.inversAdjoin();
 					M.printMatriks();
 				}
 			} else if (inputMenu == '4') {
