@@ -9,7 +9,7 @@ public class Matriks {
 	public Matriks(int _brs, int _kol) {
 		this.brs = _brs;
 		this.kol = _kol;
-		data = new double[_brs+2][_kol+2];
+		data = new double[_brs + 2][_kol + 2];
 		for (int i = 1; i < this.brs; i++) {
 			for (int j = 1; i < this.kol; i++) {
 				data[i][j] = 0;
@@ -27,7 +27,7 @@ public class Matriks {
 		return this.brs;
 	}
 
-	public int getKol(){
+	public int getKol() {
 		return this.kol;
 	}
 
@@ -53,7 +53,7 @@ public class Matriks {
 		if (nBrs < 1 || nBrs > this.brs) {
 			System.out.println("Masukan baris tidak valid");
 		} else {
-			if (k == 0){
+			if (k == 0) {
 				System.out.println("Masukan constant tidak valid");
 			} else {
 				for (int i = 1; i <= this.kol; i++) {
@@ -90,7 +90,7 @@ public class Matriks {
 	}
 
 	public int getFirstIndeks(int nBrs) {
-		//return indeks kolom tidak nol pertama
+		// return indeks kolom tidak nol pertama
 		boolean found = false;
 		int i = 1;
 		while ((i <= this.kol) && !found) {
@@ -162,7 +162,7 @@ public class Matriks {
 	public void gaussJordan() {
 		this.gaussForm();
 		for (int i = this.brs; i > 1; i--) {
-			if(!this.isBrsKosong(i)) {
+			if (!this.isBrsKosong(i)) {
 				int idxFirst = this.getFirstIndeks(i);
 				for (int j = i - 1; j >= 1; j--) {
 					if (!this.isBrsKosong(j)) {
@@ -181,7 +181,7 @@ public class Matriks {
 			Inv.data[i][i] = 1;
 		}
 		Inv.printMatriks();
-		//sort
+		// sort
 		if (this.brs > 1) {
 			for (int i = 1; i < this.brs; i++) {
 				int brsMax = i;
@@ -195,7 +195,7 @@ public class Matriks {
 				Inv.tukarBaris(i, brsMax);
 			}
 		}
-		//gauss
+		// gauss
 		for (int i = 1; i <= this.brs; i++) {
 			if (!this.isBrsKosong(i)) {
 				int idxFirst = this.getFirstIndeks(i);
@@ -227,9 +227,9 @@ public class Matriks {
 			System.out.println("invers");
 			Inv.printMatriks();
 		}
-		//gaussjordan
+		// gaussjordan
 		for (int i = this.brs; i > 1; i--) {
-			if(!this.isBrsKosong(i)) {
+			if (!this.isBrsKosong(i)) {
 				int idxFirst = this.getFirstIndeks(i);
 				for (int j = i - 1; j >= 1; j--) {
 					if (!this.isBrsKosong(j)) {
@@ -267,107 +267,105 @@ public class Matriks {
 		}
 		this.gaussJordan();
 		for (i = 1; i <= this.brs; i++) {
-				hasil *= this.data[i][i];
-			}
+			hasil *= this.data[i][i];
+		}
 		return hasil;
 	}
 
 	/**
-     * Mencari determinan dari sebuah matriks dengan metode Laplace Expansion.
-     * 
-     * @return Mengembalikan nilai determinan.
-     *         Jika matriks bukan matriks persegi (NxN) maka mengembalikan Double.NaN.
-     */
-    public double determinantLaplaceExpansion() {
-        if ((this.getKol()-1) != this.getBrs()) {
-            return Double.NaN;
-        }
+	 * Mencari determinan dari sebuah matriks dengan metode Laplace Expansion.
+	 * 
+	 * @return Mengembalikan nilai determinan. Jika matriks bukan matriks persegi
+	 *         (NxN) maka mengembalikan Double.NaN.
+	 */
+	public double determinantLaplaceExpansion() {
+		if (this.getKol() != this.getBrs()) {
+			return Double.NaN;
+		}
 
-        if (this.getKol() == 2 && this.getBrs() == 1) {
-            return this.data[1][1];
-        }
+		if (this.getKol() == 1 && this.getBrs() == 1) {
+			return this.data[1][1];
+		}
 
-        double result = 0;
+		double result = 0;
 
-        // menggunakan kolom 1
-        for (int i = 1; i <= this.getBrs(); i++) {
-            if (this.data[i][1] == 0) {
-                continue;
-            } else {
-                result += kofaktor(i, 1);
-            }
-        }
+		// menggunakan kolom 1
+		for (int i = 1; i <= this.getBrs(); i++) {
+			if (this.data[i][1] == 0) {
+				continue;
+			} else {
+				result += kofaktor(i, 1);
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * Mencari kofaktor dari sebuah entri matriks.
-     * 
-     * @param blockedRow baris entri yang ingin dicari kofaktor-nya.
-     * @param blockedColumn kolom entri yang ingin dicari kofaktor-nya.
-     * @return Kofaktor dari entri matriks masukan.
-     *         Jika matriks bukan matriks persegi (NxN) maka mengembalikan null.
-     */
-    public double kofaktor(int blockedRow, int blockedColumn) {
+	/**
+	 * Mencari kofaktor dari sebuah entri matriks.
+	 * 
+	 * @param blockedRow    baris entri yang ingin dicari kofaktor-nya.
+	 * @param blockedColumn kolom entri yang ingin dicari kofaktor-nya.
+	 * @return Kofaktor dari entri matriks masukan. Jika matriks bukan matriks
+	 *         persegi (NxN) maka mengembalikan null.
+	 */
+	public double kofaktor(int blockedRow, int blockedColumn) {
 		// Tanda positif jika (blockedRow + blockedColumn) genap dan negatif jika ganjil
-        int sign = (((blockedRow + blockedColumn) % 2) == 0) ? 1 : -1;
+		int sign = (((blockedRow + blockedColumn) % 2) == 0) ? 1 : -1;
 
-        return sign * this.minor(blockedRow, blockedColumn);
-    }
+		return sign * this.minor(blockedRow, blockedColumn);
+	}
 
-    /**
-     * Mencari minor dari sebuah entri matriks.
-     * 
-     * @param blockedRow baris entri yang ingin dicari minor-nya.
-     * @param blockedColumn kolom  entri yang ingin dicari minor-nya.
-     * @return 
-     */
-    private double minor(int blockedRow, int blockedColumn) {
-        if (blockedRow < 1 || blockedRow > this.getBrs() || blockedColumn < 1
-                || blockedColumn > this.getKol()) {
-            return Double.NaN;
-        }
+	/**
+	 * Mencari minor dari sebuah entri matriks.
+	 * 
+	 * @param blockedRow    baris entri yang ingin dicari minor-nya.
+	 * @param blockedColumn kolom entri yang ingin dicari minor-nya.
+	 * @return
+	 */
+	private double minor(int blockedRow, int blockedColumn) {
+		if (blockedRow < 1 || blockedRow > this.getBrs() || blockedColumn < 1 || blockedColumn > this.getKol()) {
+			return Double.NaN;
+		}
 
-        Matriks subMatrix = new Matriks(this.getBrs() - 1, this.getKol() - 1);
+		Matriks subMatrix = new Matriks(this.getBrs() - 1, this.getKol() - 1);
 
-        int currentRow = 1;
-        int currentColumn = 1;
+		int currentRow = 1;
+		int currentColumn = 1;
 
-        for (int i = 1; i <= this.getBrs(); i++) {
-            if (i == blockedRow) {
-                continue;
-            } else {
-                for (int j = 1; j <= this.getKol(); j++) {
-                    if (j == blockedColumn) {
-                        continue;
-                    } else {
-                        subMatrix.data[currentRow][currentColumn] = this.data[i][j];
-                        currentColumn++;
-                    }
-                }
-                currentRow++;
-            }
-        }
+		for (int i = 1; i <= this.getBrs(); i++) {
+			if (i == blockedRow) {
+				continue;
+			} else {
+				for (int j = 1; j <= this.getKol(); j++) {
+					if (j == blockedColumn) {
+						continue;
+					} else {
+						subMatrix.data[currentRow][currentColumn] = this.data[i][j];
+						currentColumn++;
+					}
+				}
+				currentRow++;
+			}
+		}
 
-        return subMatrix.determinantLaplaceExpansion();
-    }
+		return subMatrix.determinantLaplaceExpansion();
+	}
 
-    /**
-     * Melakukan transpos dari suatu matriks.
-     * 
-     * @return transpos dari matriks masukan.
-     */
-    public Matriks transposeMatriks() {
-        Matriks newMatrix = new Matriks(this.getKol(), this.getBrs());
+	/**
+	 * Melakukan transpos dari suatu matriks.
+	 * 
+	 * @return transpos dari matriks masukan.
+	 */
+	public Matriks transposeMatriks() {
+		Matriks newMatrix = new Matriks(this.getKol(), this.getBrs());
 
-        for (int i = 1; i < this.getBrs(); i++) {
-            for (int j = 1; j < this.getKol(); j++) {
-                newMatrix.data[j][i] = this.data[i][j];
-            }
-        }
+		for (int i = 1; i < this.getBrs(); i++) {
+			for (int j = 1; j < this.getKol(); j++) {
+				newMatrix.data[j][i] = this.data[i][j];
+			}
+		}
 
-        return newMatrix;
-    }
-
+		return newMatrix;
+	}
 }

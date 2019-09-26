@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -115,6 +115,6 @@ public class main {
 
 		} while (inputMenu != '7');
 
-
+		input.close();
 	}
 }
