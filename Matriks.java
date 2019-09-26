@@ -247,10 +247,26 @@ public class Matriks {
 		this.data = Inv.data;
 	}
 
-	public double determinant() {
+	public double determinantOBE() {
+		int i, j;
 		double hasil = 1;
+		if (this.brs > 1) {
+			for (i = 1; i < this.brs; i++) {
+				int brsMax = i;
+				for (j = i + 1; j <= this.brs; j++) {
+					int tempMax = this.getFirstIndeks(j);
+					if (tempMax < this.getFirstIndeks(brsMax)) {
+						brsMax = j;
+					}
+				}
+				this.tukarBaris(i, brsMax);
+				if (!(i == brsMax)) {
+					hasil *= (-1);
+				}
+			}
+		}
 		this.gaussJordan();
-		for (int i = 1; i <= this.brs; i++) {
+		for (i = 1; i <= this.brs; i++) {
 				hasil *= this.data[i][i];
 			}
 		return hasil;
@@ -263,11 +279,11 @@ public class Matriks {
      *         Jika matriks bukan matriks persegi (NxN) maka mengembalikan Double.NaN.
      */
     public double determinantLaplaceExpansion() {
-        if (this.getKol() != this.getBrs()) {
+        if ((this.getKol()-1) != this.getBrs()) {
             return Double.NaN;
         }
 
-        if (this.getKol() == 1 && this.getBrs() == 1) {
+        if (this.getKol() == 2 && this.getBrs() == 1) {
             return this.data[1][1];
         }
 

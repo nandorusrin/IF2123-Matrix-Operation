@@ -52,9 +52,43 @@ public class main {
 					System.out.println(hasil);
 				}
 			} else if (inputMenu == '2') {
-
+				MatriksSPL M;
+				System.out.printf("\nPILIHAN : \n");
+				System.out.printf(
+					"1. Metode row reduction a.k.a OBE \n" + 
+					"2. Metode ekspansi kofaktor a.k.a. Laplace-Expansion\n");
+				inputPilihan = input.next().charAt(0);
+				System.out.println("Masukkan jumlah baris dan kolom:");
+				brs = input.nextInt();
+				kol = input.nextInt();
+				M = new MatriksSPL(brs, kol);
+				M.bacaMatriks();
+				if (inputPilihan == '1') {
+					double hasil = M.determinantOBE();
+					System.out.println("Hasil determinant = " + hasil);
+				} else if (inputPilihan == '2') {
+					double hasil = M.determinantLaplaceExpansion();
+					System.out.println("Hasil determinant = " + hasil);
+				}
 			} else if (inputMenu == '3') {
-
+				MatriksSPL M;
+				System.out.printf("\nPILIHAN : \n");
+				System.out.printf(
+					"1. Metode row reduction a.k.a OBE \n" + 
+					"2. Metode adjoint\n");
+				inputPilihan = input.next().charAt(0);
+				System.out.println("Masukkan jumlah baris dan kolom:");
+				brs = input.nextInt();
+				kol = input.nextInt();
+				M = new MatriksSPL(brs, kol);
+				M.bacaMatriks();
+				if (inputPilihan == '1') {
+					M.inversOBE();
+					M.printMatriks();
+				} else if (inputPilihan == '2') {
+					//M.inversAdjoin();
+					M.printMatriks();
+				}
 			} else if (inputMenu == '4') {
 				System.out.println("Masukkan jumlah baris dan kolom:");
 				int baris = input.nextInt();
@@ -76,7 +110,7 @@ public class main {
 				solver.solve();
 				solver.printResult();
 			} else if (inputMenu == '6') {
-
+				System.out.println("on progress");
 			}
 
 		} while (inputMenu != '7');
